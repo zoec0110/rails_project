@@ -1,0 +1,11 @@
+<p>註冊頁面</p>
+<p style="color: green"><%= flash[:notice] %></p>
+<p style="color: red"><%= flash[:alert] %></p>
+<%= form_for @user, :url => sign_up_create_users_path do |f| %>
+    <%= f.label :email, "Email" %>
+    <%= f.text_field :email %>
+    <%= f.label :password, "Password" %>
+    <%= f.text_field :password %>
+    <%= f.submit "註冊" %>
+<% end %>
+<%= link_to "登入", sign_in_users_path, :method => :post %>
