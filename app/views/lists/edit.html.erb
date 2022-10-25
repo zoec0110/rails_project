@@ -1,0 +1,4 @@
+<%= form_for @list, :url => list_path(@list), :method =>:put  do |f| %>
+    <%= f.text_field :name, placeholder: @list  %>
+    <%= f.submit "更新追蹤清單名稱" %>
+<% end %>

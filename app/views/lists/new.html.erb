@@ -1,0 +1,6 @@
+<%= form_for @list, :url => lists_path do |f| %>
+    <%= f.text_field :name, placeholder: "輸入追蹤清單名稱" %>
+    <%= f.submit "建立追蹤清單" %>
+<% end %>
+<p style="color: red"><%= flash[:alert] %></p>
+
