@@ -17,8 +17,10 @@ Rails.application.routes.draw do
       post :move_down
     end
   end
-
-  root 'lists#index'
+  root 'users#sign_in'
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  delete '/logout' => 'sessions#destroy'
   # Defines the root path route ("/")
   # root "articles#index"
 end

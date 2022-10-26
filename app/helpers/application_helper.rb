@@ -4,6 +4,6 @@ module ApplicationHelper
   end
 
   def user_signed_in?
-    @current_user.present?
+    current_user.present?
   end
 end

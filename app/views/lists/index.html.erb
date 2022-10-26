@@ -2,7 +2,7 @@
 <% if @lists.count == 0 %>
     <p>你還沒有建立股票清單哦！</p>
     <p style="color: green"><%= flash[:notice] %></p>
-<% else %>    
+<% else %>
     <% @lists.each do |list| %>
         <li>
         <%= list.name %>
@@ -23,7 +23,9 @@
         </p>
         <%= link_to '點我增新追蹤股', list_stocks_path(list) %>
         </li>
+		</br>
+		<%= button_to '使用者登出', user_path(list.user_id), :method => :delete %>
     <% end %>
-<% end %> 
+<% end %>
 
 

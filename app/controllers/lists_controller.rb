@@ -2,7 +2,12 @@ class ListsController < ApplicationController
   before_action :set_list, only: %i[edit destroy update move_up move_down]
   # before_action :find_user, only: %i[create index]
   def index
-    @lists = current_user.lists.order(:number)
+    if user_signed_in?
+      @lists = current_user.lists.order(:number)
+    else
+      redirect_to root_url
+    end
+    # @lists = current_user.lists.order(:number)
     # @lists = List.all
   end
 
@@ -40,21 +45,21 @@ class ListsController < ApplicationController
 
   def move_up
     @list.move_up_number
-    redirect_to root_url
+    redirect_to lists_url
   end
 
   def move_down
     @list.move_down_number
-    redirect_to root_url
+    redirect_to lists_url
   end
 
   private
 
-  def list_params
-    params.require(:list).permit(:name)
-  end
+    def list_params
+      params.require(:list).permit(:name)
+    end
 
-  def set_list
-    @list = List.find(params[:id])
-  end
+    def set_list
+      @list = List.find(params[:id])
+    end
 end
