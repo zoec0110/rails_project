@@ -7,8 +7,6 @@ class ListsController < ApplicationController
     else
       redirect_to root_url
     end
-    # @lists = current_user.lists.order(:number)
-    # @lists = List.all
   end
 
   def new
@@ -17,7 +15,6 @@ class ListsController < ApplicationController
 
   def create
     @list = current_user.lists.build(list_params)
-    @list.add_order
     if @list.save
       redirect_to lists_url
     else

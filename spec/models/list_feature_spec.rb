@@ -5,10 +5,10 @@ RSpec.describe List, type: :feature do
     before(:each) do
       visit 'users/sign_in'
       User.create!(email: '111@123', password: '123')
-      fill_in_sign_in_and_submit_with
+      fill_in_sign_in_form_and_submit
     end
 
-    def fill_in_sign_in_and_submit_with
+    def fill_in_sign_in_form_and_submit
       within('#new_user') do
         fill_in 'user_email', with: '111@123'
         fill_in 'user_password', with: '123'
