@@ -18,18 +18,18 @@ class ListStocksController < ApplicationController
   end
 
   def destroy
-    @stock = @list.stocks.find(params[:id])
-    @stock.destroy
+    @list_stockships = @list.list_stockships.find_by(stock_id: params[:id])
+    @list_stockships.destroy
     redirect_to lists_url
   end
 
   private
 
-  def find_list
-    @list = List.find(params[:list_id])
-  end
+    def find_list
+      @list = current_user.lists.find(params[:list_id])
+    end
 
-  def stock_params
-    params.require(:stock).permit(:stock_symbol)
-  end
+    def stock_params
+      params.require(:stock).permit(:stock_symbol)
+    end
 end

@@ -6,21 +6,25 @@ class List < ApplicationRecord
   has_many :stocks, through: :list_stockships
 
   def move_up_number
-    last_list = user.lists.where('number < ?', number).order('number desc')
-    current_number = number
-    self.number = last_list.first.number
-    last_list.first.number = current_number
-    save
-    last_list.first.save
+    List.transaction do
+      last_list = user.lists.where('number < ?', number).order('number desc')
+      current_number = number
+      update!(number: last_list.first.number)
+      last_list.first.update(number: current_number)
+    end
+  rescue StandardError => e
+    flash[:alert] = "移動失敗! 錯誤訊息: #{e}"
   end
 
   def move_down_number
-    next_list = user.lists.where('number > ?', number).order('number asc')
-    current_number = number
-    self.number = next_list.first.number
-    next_list.first.number = current_number
-    save
-    next_list.first.save
+    List.transaction do
+      next_list = user.lists.where('number > ?', number).order('number asc')
+      current_number = number
+      update!(number: next_list.first.number)
+      next_list.first.update!(number: current_number)
+    end
+  rescue StandardError => e
+    flash[:alert] = "移動失敗! 錯誤訊息: #{e}"
   end
 
   private
