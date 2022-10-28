@@ -10,7 +10,7 @@ class List < ApplicationRecord
       last_list = user.lists.where('number < ?', number).order('number desc')
       current_number = number
       update!(number: last_list.first.number)
-      last_list.first.update(number: current_number)
+      last_list.first.update!(number: current_number)
     end
   rescue StandardError => e
     flash[:alert] = "移動失敗! 錯誤訊息: #{e}"

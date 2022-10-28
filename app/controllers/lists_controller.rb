@@ -1,6 +1,5 @@
 class ListsController < ApplicationController
   before_action :set_list, only: %i[edit destroy update move_up move_down]
-  # before_action :find_user, only: %i[create index]
   def index
     if user_signed_in?
       @lists = current_user.lists.order(:number)
