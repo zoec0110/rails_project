@@ -40,15 +40,19 @@ class ListsController < ApplicationController
   end
 
   def move_up
-    if @list.move_up_number == '向上移動失敗'
-      flash[:alert] = @list.move_up_number
+    begin
+      @list.move_up_number
+    rescue StandardError
+      flash[:alert] = '向上移動失敗'
     end
     redirect_to lists_url
   end
 
   def move_down
-    if @list.move_down_number == '向下移動失敗'
-      flash[:alert] = @list.move_down_number
+    begin
+      @list.move_down_number
+    rescue StandardError
+      flash[:alert] = '向下移動失敗'
     end
     redirect_to lists_url
   end

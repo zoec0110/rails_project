@@ -24,14 +24,14 @@ RSpec.describe List, type: :feature do
       click_button '建立追蹤清單'
     end
 
-    it 'check list page' do
+    it 'checks list page' do
       visit '/lists'
       expect(page).to have_content('你還沒有建立股票清單哦！')
       expect(page).to have_selector(:link_or_button, '使用者登出')
       expect(page).to have_selector(:link_or_button, '點我建立新的追蹤清單')
     end
 
-    it 'create list' do
+    it 'creates list' do
       create_list("清單一")
 
       visit '/'
@@ -41,7 +41,7 @@ RSpec.describe List, type: :feature do
       expect(page).to have_selector(:link_or_button, '刪除')
     end
 
-    it 'edit list name' do
+    it 'edits list name' do
       create_list("清單一")
 
       visit '/lists/1/edit'
@@ -55,14 +55,14 @@ RSpec.describe List, type: :feature do
       expect(page).to have_content('新清單')
     end
 
-    it 'delete list' do
+    it 'deletes list' do
       create_list("清單一")
       visit '/'
       click_button '刪除'
       expect(page).not_to have_content('清單一')
     end
 
-    it 'create stock' do
+    it 'creates stock' do
       create_list("清單一")
 
       visit '/lists/1/stocks'
@@ -79,7 +79,7 @@ RSpec.describe List, type: :feature do
       expect(page).to have_content('台積電')
     end
 
-    it 'change user' do
+    it 'changes user' do
       visit '/lists'
       click_button '使用者登出'
 

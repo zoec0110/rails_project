@@ -12,8 +12,6 @@ class List < ApplicationRecord
       update!(number: last_list.first.number)
       last_list.first.update!(number: current_number)
     end
-  rescue StandardError
-    '向上移動失敗'
   end
 
   def move_down_number
@@ -23,8 +21,6 @@ class List < ApplicationRecord
       update!(number: next_list.first.number)
       next_list.first.update!(number: current_number)
     end
-  rescue StandardError
-    '向下移動失敗'
   end
 
   private
