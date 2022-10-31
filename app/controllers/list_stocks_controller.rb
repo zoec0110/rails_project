@@ -9,7 +9,7 @@ class ListStocksController < ApplicationController
   def create
     if Stock.find_by(stock_params)
       @stock = Stock.find_by(stock_params)
-      ListStockship.create(list: @list, stock: @stock)
+      @list.stocks << @stock
       redirect_to lists_url
     else
       flash[:alert] = '此股號不存在'
@@ -18,8 +18,7 @@ class ListStocksController < ApplicationController
   end
 
   def destroy
-    @list_stockships = @list.list_stockships.find_by(stock_id: params[:id])
-    @list_stockships.destroy
+    @list.stocks.destroy(Stock.find(params[:id]))
     redirect_to lists_url
   end
 

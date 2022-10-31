@@ -12,8 +12,8 @@ class List < ApplicationRecord
       update!(number: last_list.first.number)
       last_list.first.update!(number: current_number)
     end
-  rescue StandardError => e
-    flash[:alert] = "移動失敗! 錯誤訊息: #{e}"
+  rescue StandardError
+    '向上移動失敗'
   end
 
   def move_down_number
@@ -23,16 +23,15 @@ class List < ApplicationRecord
       update!(number: next_list.first.number)
       next_list.first.update!(number: current_number)
     end
-  rescue StandardError => e
-    flash[:alert] = "移動失敗! 錯誤訊息: #{e}"
+  rescue StandardError
+    '向下移動失敗'
   end
 
   private
 
     def add_order
       if user.lists.count.zero?
-        list_qty = 0
-        self.number = list_qty + 1
+        self.number = 1
       else
         list_order = user.lists.maximum(:number)
         self.number = list_order + 1
