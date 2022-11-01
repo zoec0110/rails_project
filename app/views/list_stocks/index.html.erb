@@ -1,0 +1,7 @@
+<p>增新追蹤股於 <%= @list.name %></p>
+
+<%= form_for @stock, :url => list_stocks_path do |f| %>
+    <%= f.text_field :stock_symbol, placeholder: "輸入股號" %>
+    <%= f.submit "增新追蹤股" %>
+<% end %>
+<p style="color: red"><%= flash[:alert] %></p>
